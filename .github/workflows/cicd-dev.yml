@@ -65,6 +65,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pwd && ls -la
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
@@ -76,6 +77,7 @@ jobs:
 #        password: ${{ secrets.DEV_PASSWORD }}
         key: ${{ secrets.DEV_KEY }}
         script: |
+          pwd && ls -la
           git pull
           python app.py
 
