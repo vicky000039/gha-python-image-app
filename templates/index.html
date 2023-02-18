@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Python Web Application</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .center {
+        text-align: center;
+      }
+      .download-button {
+        background-color: white;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+      }
+      .download-button:hover {
+        background-color: royalblue;
+        color: white;
+      }
+      .navigate-button {
+        background-color: lime;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+      }
+      .navigate-button:hover {
+        background-color: green;
+        color: white;
+      }    
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+      }    
+    </style>
+  </head>
+  <body>
+      <body class="index">
+    <h1>Welcome to the Python Web Application</h1>
+    <p style="font-size: 20px;">This web application is built using Flask, a micro web framework for Python.</p>
+    
+    <h1>References to DevOps technologies used to deliver this application</h1>
+    <a href="{{ url_for('page1') }}">Page 1 - OpenShift Container Platform</a><br>
+    <a href="{{ url_for('page2') }}">Page 2 - Azure Container Registry</a><br>
+    <a href="{{ url_for('page3') }}">Page 3 - Docker for Containerization</a><br>
+    <br>
+
+    <h1>Random Picture Downloader</h1>
+
+    <p style="font-size: 20px;">Please click on the below option to download a random picture from <a href="https://picsum.photos">Picsum Photos </a></p></br>
+    
+
+    <a href="https://picsum.photos/4096/2160" class="download-button">Download 4096x2160</a>
+    <a href="https://picsum.photos/4096/2160" class="download-button">Download 1080x720</a>
+    
+    <br>
+    <br>
+
+<h1>Test Latency & Throughput</h1>
+
+<p style="font-size: 20px;">Please click to open a picture from the app </p></br>
+
+  <a href="static/image1.jpg"  class="download-button">Image 1</a>
+  <a href="static/image2.jpg"  class="download-button">Image 2</a>
+  <a href="static/image3.jpg"  class="download-button">Image 3</a>
+  <a href="static/image4.jpg"  class="download-button">Image 4</a>
+  <a href="static/image5.jpg"  class="download-button">Image 5</a>
+
+    <div id="output"></div>
+    <script>
+      function calculateLatency() {
+        var startTime = performance.now();
+        // send a ping request to the server
+        var server = 'google.com';
+        var port = 80;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://" + server, true);
+        xhr.timeout = 2000;
+        xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var endTime = performance.now();
+              var latency = (endTime - startTime) / 1000;
+              document.getElementById("output").innerHTML += "<p>Latency: " + latency + " seconds</p>";
+            } else {
+              document.getElementById("output").innerHTML += "<p>Error: Failed to calculate latency</p>";
+            }
+          }
+        };
+        xhr.ontimeout = function (e) {
+          document.getElementById("output").innerHTML += "<p>Error: Failed to calculate latency</p>";
+        };
+        xhr.send(null);
+      }
+
+      function calculateThroughput() {
+        // send data to the server and measure the time taken
+        var message = new Array(1000000 + 1).join('x'); // 1 MB of data
+        var startTime = performance.now();
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://google.com", true);
+        xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var endTime = performance.now();
+              var throughput = message.length / ((endTime - startTime) / 1000);
+              document.getElementById("output").innerHTML += "<p>Throughput: " + throughput + " bytes/second</p>";
+            } else {
+              document.getElementById("output").innerHTML += "<p>Error: Failed to calculate throughput</p>";
+            }
+          }
+        };
+        xhr.send(message);
+      }
+
+      calculateLatency();
+      calculateThroughput();
+
+    </script>
+  </br>
+</br>
+
+<div class="footer">
+    <a class="navigate-button" href="{{ url_for('page1') }}">Page 1</a>
+    <a class="navigate-button" href="{{ url_for('page2') }}">Page 2</a>
+    <a class="navigate-button" href="{{ url_for('page3') }}">Page 3</a>
+</div>
+
+  </body>
+</html>

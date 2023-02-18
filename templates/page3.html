@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Docker for Containerization</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .download-button {
+        background-color: white;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+      }
+      .download-button:hover {
+        background-color: royalblue;
+        color: white;
+      }
+      .navigate-button {
+        background-color: lime;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+      }
+      .navigate-button:hover {
+        background-color: green;
+        color: white;
+      }    
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+      }    
+    </style>
+  </head>
+  <body>
+      <body class="page3">
+      <h1>Docker for Containerization</h1>
+      <p style="font-size: 20px;">
+        Docker is a platform for building, shipping, and running distributed applications. It is a technology that enables developers to create, deploy, and run applications in containers, which are isolated units of software that can run on any infrastructure. Some of the key benefits of using Docker include:
+      </p>
+      <ul>
+        <li>Agility: Docker makes it easy to quickly create, test, and deploy applications, enabling developers to move faster and respond to changing requirements more effectively.</li>
+        <li>Portability: Docker containers can run on any infrastructure that supports Docker, including on-premises, cloud, and hybrid environments, making it easy to move applications from one environment to another.</li>
+        <li>Consistency: Docker enables developers to create a consistent environment for applications, ensuring that applications run the same way on any infrastructure, regardless of differences in the underlying operating system or infrastructure.</li>
+        <li>Scalability: Docker enables organizations to scale their applications, whether by adding more containers to handle increased load, or by adding more infrastructure to support additional containers.</li>
+        <li>Collaboration: Docker makes it easy for teams of developers to collaborate on building, testing, and deploying applications, enabling organizations to move faster and achieve better results.</li>
+      </ul>
+      <p>
+        Whether you are building new applications or modernizing existing ones, Docker provides a powerful platform for building, shipping, and running distributed applications, enabling organizations to take advantage of the benefits of containerization.
+      </p>
+      <p>
+        In addition to Docker, other popular open source tools for building and managing containers include:
+      </p>
+      <ul>
+        <li><a href="https://containerd.io/">Containerd</a>: A high-performance container runtime for deploying containers.</li>
+        <li><a href="https://buildah.io/">Buildah</a>: A tool for building containers, without requiring a daemon or a full OS.</li>
+      </ul>
+    </br>
+  </br>
+  
+  <div class="footer">
+  <a class="navigate-button" href="/">Home</a>
+    <a class="navigate-button" href="{{ url_for('page1') }}">Page 1</a>
+    <a class="navigate-button" href="{{ url_for('page2') }}">Page 2</a>
+  </div>
+
+  </body>
+</html>

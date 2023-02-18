@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenShift Container Platform</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .download-button {
+        background-color: white;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+      }
+      .download-button:hover {
+        background-color: royalblue;
+        color: white;
+      }
+      .navigate-button {
+        background-color: lime;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+      }
+      .navigate-button:hover {
+        background-color: green;
+        color: white;
+      }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+      }    
+    </style>
+  </head>
+  <body>
+      <body class="page1">
+      <h1>OpenShift Container Platform</h1>
+      <p style="font-size: 20px;">
+        OpenShift is a container application platform that provides a comprehensive solution for deploying, managing, and scaling containerized applications. It is based on Kubernetes, an open source platform for automating the deployment, scaling, and management of containerized applications. Some of the key benefits of using OpenShift include:
+      </p>
+      <ul>
+        <li>Automated management: OpenShift provides a comprehensive platform for deploying, scaling, and managing containerized applications, making it easy to deploy applications quickly and manage them efficiently.</li>
+        <li>Integrated CI/CD: OpenShift integrates with popular continuous integration and continuous delivery (CI/CD) tools, making it easy to automate the build, test, and deployment process for applications.</li>
+        <li>Scalable infrastructure: OpenShift provides a scalable infrastructure for deploying containerized applications, making it easy to add more resources as needed to support growing applications.</li>
+        <li>Platform-agnostic: OpenShift can run on any infrastructure, including on-premises, public cloud, and hybrid cloud environments, making it easy to deploy applications in the environment that best meets your needs.</li>
+        <li>Enterprise-grade security: OpenShift provides a secure platform for deploying containerized applications, with integrated security features that help to protect applications and data from threats and attacks.</li>
+      </ul>
+      <p style="font-size: 20px;">
+        Whether you are building new applications or modernizing existing ones, OpenShift provides a powerful platform for deploying, scaling, and managing containerized applications, enabling organizations to take advantage of the benefits of containerization and Kubernetes.
+      </p>
+      <h2>Alternatives</h2>
+      <p style="font-size: 20px;">
+        There are other platforms available that provide similar functionality to OpenShift, including:
+      </p>
+      <ul>
+        <li><a href="https://kubernetes.io/">Kubernetes</a>: A popular open-source platform for automating the deployment, scaling, and management of containerized applications.</li>
+        <li><a href="https://rancher.com/">Rancher</a>: An enterprise-grade container management platform that provides a comprehensive solution for deploying, managing, and scaling containerized applications.</li>
+      </ul>
+    </br>
+  </br>
+
+  <div class="footer">
+    <a class="navigate-button" href="/">Home</a>
+    <a class="navigate-button" href="{{ url_for('page2') }}">Page 2</a>
+    <a class="navigate-button" href="{{ url_for('page3') }}">Page 3</a>
+  </div>
+
+  </body>
+</html>

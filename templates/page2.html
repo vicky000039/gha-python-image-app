@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Azure Container Registry</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      .download-button {
+        background-color: white;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+      }
+      .download-button:hover {
+        background-color: royalblue;
+        color: white;
+      }
+      .navigate-button {
+        background-color: lime;
+        font-size: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+        justify-content: center;
+        align-items: center;
+      }
+      .navigate-button:hover {
+        background-color: green;
+        color: white;
+      }    
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        text-align: center;
+      }    
+    </style>
+  </head>
+  <body>
+      <body class="page2">
+    <h1>Azure Container Registry</h1>
+    <p style="font-size: 20px;">
+      Azure Container Registry (ACR) is a managed container registry service provided by Microsoft Azure. Some of its key features include:
+    </p>
+    <ul>
+      <li>Easy to use: ACR provides a simple and intuitive web-based interface for managing container images, as well as a command-line interface for automation.</li>
+      <li>Secure: ACR provides built-in security features, such as role-based access control and network security, making it a secure platform for storing and managing container images.</li>
+      <li>Scalable: ACR can scale to handle the needs of large organizations, providing the ability to store and manage millions of images with ease.</li>
+      <li>Integration with Azure: ACR integrates with other Azure services, such as Azure Kubernetes Service (AKS), making it easy to deploy and manage containers in the Azure cloud.</li>
+      <li>Cost-effective: ACR provides a cost-effective solution for storing and managing containers, with a pay-as-you-go pricing model and no upfront costs.</li>
+    </ul>
+    <p>
+      By using ACR, organizations can take advantage of the scalability and security of Azure, while also benefiting from a cost-effective and easy-to-use platform for managing container images.
+    </p style="font-size: 20px;"></br>
+  </br>
+</br>
+
+<div class="footer">
+    <a class="navigate-button" href="/">Home</a>
+    <a class="navigate-button" href="{{ url_for('page1') }}">Page 1</a>
+    <a class="navigate-button" href="{{ url_for('page3') }}">Page 3</a>
+  </div>
+
+  </body>
+</html>
