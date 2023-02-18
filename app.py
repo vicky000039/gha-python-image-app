@@ -40,6 +40,7 @@ def download_random_picture():
         print("Successfully downloaded random picture.")
     else:
         print("Failed to download random picture.")
+
 def calculate_latency():
     start_time = time.time()
     # send a ping request to the server
@@ -52,6 +53,8 @@ def calculate_latency():
         print("Latency: {} seconds".format(latency))
     except:
         print("Error: Failed to calculate latency")
+
+
 def calculate_throughput():
     # send data to the server and measure the time taken
     message = b'x' * 1000000 # 1 MB of data
@@ -67,6 +70,8 @@ def calculate_throughput():
         print("Throughput: {} bytes/second".format(throughput))
     except:
         print("Error: Failed to calculate throughput")
+
+        
 calculate_latency()
 calculate_throughput()
 if __name__ == "__main__":
