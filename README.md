@@ -3,7 +3,7 @@
 Build the image using the following command
 
 ```bash
-$ docker build -t latency:latest .
+$ docker build -t latency-app:latest .
 ```
 
 Run the Docker container using the command shown below.
