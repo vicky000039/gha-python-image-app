@@ -76,6 +76,6 @@ jobs:
 #        password: ${{ secrets.DEV_PASSWORD }}
         key: ${{ secrets.DEV_KEY }}
         script: |
-          git pull && git checkout dev
+          git pull
           python app.py
 
