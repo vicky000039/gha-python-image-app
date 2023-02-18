@@ -14,7 +14,7 @@ env:
   OPENSHIFT_SERVER_URL: ${{ secrets.OPENSHIFT_DEV_SERVER_URL}}
   OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
   OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_DEV_NAMESPACE }}
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -57,6 +57,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     needs: [build]
+    environment:
+      name: prod
     steps:
     - uses: actions/checkout@v2
 
