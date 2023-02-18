@@ -73,7 +73,7 @@ jobs:
       with:
         host: ${{ secrets.DEV_SERVER }}
         username: ${{ secrets.DEV_USERNAME }}
-        password: ${{ secrets.DEV_PASSWORD }}
+#        password: ${{ secrets.DEV_PASSWORD }}
         key: ${{ secrets.DEV_KEY }}
         script: |
           git pull && git checkout dev
