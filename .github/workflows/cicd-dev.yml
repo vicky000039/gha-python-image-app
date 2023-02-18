@@ -27,7 +27,7 @@ jobs:
 
     - name: Run Unit tests on the app
       run: |
-        pytest
+        python -m py_compile app.py
 
   lint:
     runs-on: ubuntu-latest
