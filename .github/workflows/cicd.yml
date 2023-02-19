@@ -6,13 +6,23 @@ on:
       - feat/family
 
 jobs:
-  hello:
+  lint:
     runs-on: ubuntu-latest
-    steps: 
-      - name: step1
-        run: date
-      - name: step2
-        run: |
-          pwd
-          ls
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python Environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+    - name: Lint app-code
+      run: |
+        python --version
+#        flake8 --extend-ignore E203,W234,E302,E305,E722
+
          
