@@ -64,10 +64,10 @@ jobs:
 
     - name: Promote current release-image as prod
       run: |
-        docker pull ${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:$(echo $GITHUB_SHA | head -c7)
-        docker image tag $${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:$(echo $GITHUB_SHA | head -c7) \
-                          ${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest
-        docker push ${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest
+        docker pull ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:$(echo $GITHUB_SHA | head -c7)
+        docker image tag ${{ env.CONTAINER_REGISTRY }}/$${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:$(echo $GITHUB_SHA | head -c7) \
+                          ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest
+        docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest
 
     - name: Login to OpenShift - ${{ env.OPENSHIFT_NAMESPACE }}
       uses: redhat-actions/oc-login@v1
@@ -80,7 +80,7 @@ jobs:
     - name: Update ImageStream latest Tag to point to new latest image in Container Registry
       run: |
         oc project ${{ env.OPENSHIFT_NAMESPACE }}
-        oc tag ${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest ${{ env.APP_IMAGE_NAME }}:latest
+        oc tag ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:latest ${{ env.APP_IMAGE_NAME }}:latest
 
     - name: Deploy to OpenShift - Status Check
       run: |
