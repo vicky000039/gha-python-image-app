@@ -1,6 +1,11 @@
-name: CI/CD
+name: CI/CD for Dev Environment
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+    - feat/*
+    - feature/*
+    - bugfix/*
 
 env:
   ENV: "dev"
