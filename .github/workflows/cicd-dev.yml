@@ -4,6 +4,11 @@ on: [push, pull_request]
 
 env:
   ENV: "dev"
+  APP_NAME: image-app
+  APP_IMAGE_NAME: image-app
+  APP_IMAGE_TAG: dev
+  REPOSITORY_URL: "https://github.com/bobbybabu007/gha-python-image-app.git"
+  REPOSITORY_NAME: "gha-python-image-app"
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   CONTAINER_REGISTRY_PULL_SECRET: ${{ secrets.QUAY_DOCKER_CONFIG_JSON_PULL_SECRET}}
@@ -12,6 +17,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: [lint]
     steps:
     - uses: actions/checkout@v2
 
@@ -28,6 +34,20 @@ jobs:
     - name: Run Unit tests on the app
       run: |
         python -m py_compile app.py
+
+    - name: Determine image tags (If not yet present)
+      if: env.APP_IMAGE_TAG == ''
+      run: |
+        echo "APP_IMAGE_TAG=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
+
+    - name: Build container image
+      run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/racing-game-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT .
+
+    - name: Docker Login
+      run: docker login -u ${{ env.DOCKER_USERNAME }} -p ${{ env.DOCKER_PASSWORD }} ${{ env.CONTAINER_REGISTRY }}
+
+    - name: Push image to DockerHub
+      run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/racing-game-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT
 
   lint:
     runs-on: ubuntu-latest
@@ -73,11 +93,16 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEV_SERVER }}
-        username: ${{ secrets.DEV_USERNAME }}
-#        password: ${{ secrets.DEV_PASSWORD }}
+#        username: ${{ secrets.DEV_USERNAME }}
+        password: ${{ secrets.DEV_PASSWORD }}
         key: ${{ secrets.DEV_KEY }}
         script: |
-          pwd && ls -la
-          git pull
-          python app.py
-
+          sudo systemctl stop image-app.service
+          sudo rm -Rf ~/app-src
+          git clone ${{ env.REPOSITORY_URL }} ~/app-src && cd ~/app-src
+          git pull && git checkout dev
+          python -m pip install --upgrade pip && pip install -r requirements.txt
+          sudo chown root app.py
+          sudo systemctl enable image-app.service
+          sudo systemctl restart image-app.service
+          sudo systemctl status image-app.service  | grep -i "active"
