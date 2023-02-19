@@ -1,0 +1,128 @@
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: image-app
+  labels:
+    app: image
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: latest
+      annotations: null
+      from:
+        kind: DockerImage
+        name: 'bobbybabu007/image-app:latest'
+      importPolicy: {}
+      referencePolicy:
+        type: Source
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: image-app
+  labels:
+    app: image
+type: Opaque
+stringData:
+  username: YWRtaW4K
+  password: cGFzc3dvcmQK
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: image-app
+  labels:
+    app: image
+data:
+  demo.property.1: hello
+  demo.property.2: world
+  demo.property.file: |-
+    property.1=value-1
+    property.2=value-2
+    property.3=value-3
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: image-app
+spec:
+  replicas: 3
+  selector:
+    app: image
+  template:
+    metadata:
+      labels:
+        app: image
+    spec:
+      containers:
+        - name: web
+          image: image-app:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "300m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - prefix: secret-
+              secretRef:
+                name: image-app   
+      strategy:
+        type: Rolling
+        rollingParams:
+          updatePeriodSeconds: 1
+          intervalSeconds: 1
+          timeoutSeconds: 600
+          maxUnavailable: 25%
+          maxSurge: 25%
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 10m
+            memory: 64Mi
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - web
+        from:
+          kind: ImageStreamTag
+          namespace: bobbybabu007-dev
+          name: 'image-app:latest'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: image
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: image-app
+spec: 
+  port:
+    targetPort: 5000
+  to:
+    kind: Service
+    name: image-app
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
