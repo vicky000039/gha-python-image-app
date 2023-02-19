@@ -7,7 +7,7 @@ on:
 
 env:
   ENV: "prod"
-  APP_NAME: image-app-openshift
+  APP_NAME: image-app
   APP_IMAGE_NAME: image-app
   APP_IMAGE_TAG: latest
   REPOSITORY_URL: "https://github.com/bobbybabu007/gha-python-image-app.git"
