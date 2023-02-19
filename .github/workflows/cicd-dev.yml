@@ -41,13 +41,13 @@ jobs:
         echo "APP_IMAGE_TAG=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
 
     - name: Build container image
-      run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/racing-game-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT .
+      run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/image-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT .
 
     - name: Docker Login
       run: docker login -u ${{ env.DOCKER_USERNAME }} -p ${{ env.DOCKER_PASSWORD }} ${{ env.CONTAINER_REGISTRY }}
 
     - name: Push image to DockerHub
-      run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/racing-game-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT
+      run: docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/image-app:$(echo $GITHUB_SHA | head -c7)-SNAPSHOT
 
   lint:
     runs-on: ubuntu-latest
