@@ -62,6 +62,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Docker Login
+      run: docker login -u ${{ env.DOCKER_USERNAME }} -p ${{ env.DOCKER_PASSWORD }} ${{ env.CONTAINER_REGISTRY }}
+
     - name: Promote current release-image as prod
       run: |
         docker pull ${{ env.CONTAINER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.APP_IMAGE_NAME }}:$(echo $GITHUB_SHA | head -c7)
